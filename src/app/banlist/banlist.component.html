@@ -12,7 +12,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr  *ngFor="let card of cards" [ngClass]="card.type">
+          <tr *ngFor="let card of cards; let i = index" [ngClass]="card.type" (click)="onEditCard(i)">
             <td scope="row">{{card.type}}</td>
             <td>{{card.name}}</td>
             <td>{{card.status}}</td>

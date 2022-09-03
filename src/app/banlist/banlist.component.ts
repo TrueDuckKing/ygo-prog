@@ -15,4 +15,8 @@ export class BanlistComponent implements OnInit {
   ngOnInit(){
     this.cards = this.cardsService.cards;
   }
+
+  onEditCard(index: number){
+    this.cardsService.startedEditing.next(index);
+  }
 }

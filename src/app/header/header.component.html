@@ -25,9 +25,10 @@
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown" appDropdown>
         <a style="cursor: pointer;" class="dropdown-toggle" role="button" >Opcje <span class="caret"></span></a>
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu show">
+          <!-- delete .show after fixing dropdown -->
           <li><a style="cursor: pointer;">Save Data</a></li>
-          <li><a style="cursor: pointer;">Fetch Data</a></li>
+          <li><a style="cursor: pointer;" (click)="fetchCard()">Fetch Data</a></li>
         </ul>
       </li>
     </ul>

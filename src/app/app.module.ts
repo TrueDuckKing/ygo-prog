@@ -6,15 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { BanlistComponent } from './banlist/banlist.component';
-import { CardsService } from './banlist/cards.service';
 import { UsersComponent } from './users/users.component';
 import { CardBaseComponent } from './card-base/card-base.component';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { UsersListComponent } from './users/users-list/users-list.component';
 import { UsersDetailComponent } from './users/users-detail/users-detail.component';
 import { BanlistEditComponent } from './banlist/banlist-edit/banlist-edit.component';
-import { UserService } from './users/users-list/users-list.service';
 import { UsersStartComponent } from './users/users-start/users-start.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,9 +31,10 @@ import { UsersStartComponent } from './users/users-start/users-start.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [CardsService, UserService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
