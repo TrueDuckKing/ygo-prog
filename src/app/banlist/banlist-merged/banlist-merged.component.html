@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-xs-12">
+    <app-banlist-edit></app-banlist-edit>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Rodzaj Karty</th>
+            <th scope="col">Nazwa Karty</th>
+            <th scope="col">Status</th>
+            <th scope="col">Poprzedni Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let card of cards | sort; let i = index" [ngClass]="card.type" (click)="onEditCard(i)">
+            <td scope="row">{{card.type}}</td>
+            <td>{{card.name}}</td>
+            <td>{{card.status}}</td>
+            <td>{{card.was}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

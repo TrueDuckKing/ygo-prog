@@ -1,0 +1,19 @@
+.Effect {
+  background-color: orange;
+}
+
+.Normal {
+  background-color: yellow;
+}
+
+.Spell {
+  background-color: mediumseagreen ;
+}
+
+.Trap {
+  background-color: palevioletred;
+}
+
+thead {
+  background-color: silver;
+}

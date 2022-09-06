@@ -1,25 +1,9 @@
+<br>
 <div class="row">
-  <app-banlist-edit></app-banlist-edit>
-  <div class="col-xs-12">
-    <div class="table-responsive">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">Rodzaj Karty</th>
-            <th scope="col">Nazwa Karty</th>
-            <th scope="col">Status</th>
-            <th scope="col">Poprzedni Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let card of cards; let i = index" [ngClass]="card.type" (click)="onEditCard(i)">
-            <td scope="row">{{card.type}}</td>
-            <td>{{card.name}}</td>
-            <td>{{card.status}}</td>
-            <td>{{card.was}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="col-md-3">
+    <app-banlist-list></app-banlist-list>
+  </div>
+  <div class="col-md-9">
+    <router-outlet></router-outlet>
   </div>
 </div>

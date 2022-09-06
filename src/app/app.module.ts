@@ -14,6 +14,11 @@ import { UsersDetailComponent } from './users/users-detail/users-detail.componen
 import { BanlistEditComponent } from './banlist/banlist-edit/banlist-edit.component';
 import { UsersStartComponent } from './users/users-start/users-start.component';
 import { FormsModule } from '@angular/forms';
+import { BanlistCustomComponent } from './banlist/banlist-custom/banlist-custom.component';
+import { BanlistMergedComponent } from './banlist/banlist-merged/banlist-merged.component';
+import { BanlistOfficialComponent } from './banlist/banlist-official/banlist-official.component';
+import { BanlistListComponent } from './banlist/banlist-list/banlist-list.component';
+import { SortPipe } from './shared/sort.pipe';
 
 @NgModule({
   declarations: [
@@ -27,12 +32,17 @@ import { FormsModule } from '@angular/forms';
     UsersDetailComponent,
     BanlistEditComponent,
     UsersStartComponent,
+    BanlistCustomComponent,
+    BanlistMergedComponent,
+    BanlistOfficialComponent,
+    BanlistListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    SortPipe
   ],
   providers: [],
   bootstrap: [AppComponent]

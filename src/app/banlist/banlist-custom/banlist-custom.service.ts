@@ -1,22 +1,16 @@
-import { Injectable, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-
-import { CardAPI } from '../shared/card-api.service';
-import { Card } from '../shared/card.model';
+import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
+import { Card } from "src/app/shared/card.model";
 
 @Injectable({
   providedIn: 'root'
 })
-export class CardsService implements OnInit{
+export class BanlistCustom {
   startedEditing = new Subject<number>();
 
   cards: Array<Card> = [
     new Card('Banned', 'Yata-Garasu', 'Effect Monster'),
   ]
-  constructor(private cardApi: CardAPI) {}
-
-  ngOnInit(): void {
-  }
 
   getCard(index: number){
     return this.cards[index];
