@@ -33,26 +33,20 @@ export class BanlistEditComponent implements OnInit, OnDestroy {
       );
   }
 
-
-  //Trying to fix this
   onAddCard(form: NgForm) {
     const value = form.value;
-    let newInfo;
     this.cardApi.getCard(value.name)
       .subscribe(
-        i => {
-          console.log(i);
-          newInfo = i;
+        cardInfo => {
+          const newCard = new Card(value.status, cardInfo.name, cardInfo.type);
+          if(this.editMode) {
+            this.banlistCustom.updateCard(this.editedCardIndex, newCard)
+          } else {
+            this.banlistCustom.addCard(newCard);
+          }
       }
     )
-    console.log(newInfo)
-    const newCard = new Card(value.status, value.name, '');
-    if(this.editMode) {
-      this.banlistCustom.updateCard(this.editedCardIndex, newCard)
-    } else {
-      this.banlistCustom.addCard(newCard);
-    }
-      this.editMode = false
+    this.editMode = false
     form.reset();
   }
 

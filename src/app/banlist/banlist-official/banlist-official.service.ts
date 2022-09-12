@@ -1,59 +1,73 @@
 import { Injectable } from "@angular/core";
-import { Card } from "src/app/shared/card.model";
+import { CardAPI } from "src/app/shared/card-api.service";
+import { Card } from "src/app/shared/card.model"
 
-@Injectable({
-  providedIn: 'root'
-})
-export class BanlistOfficial{
-  cards: Array<Card> = [
-    new Card('Limited', 'Exodia the Forbbiden One', 'Effect Monster'),
-    new Card('Limited', 'Left Leg of the Forbidden One', 'Normal Monster'),
-    new Card('Limited', 'Left Arm of the Forbidden One', 'Normal Monster'),
-    new Card('Limited', 'Right Leg of the Forbidden One', 'Normal Monster'),
-    new Card('Limited', 'Right Arm of the Forbidden One', 'Normal Monster'),
-    new Card('Limited', 'Cyber Jar', 'Effect Monster'),
-    new Card('Limited', 'Witch of the Black Forest', 'Effect Monster'),
-    new Card('Limited', 'Jinzo', 'Effect Monster'),
-    new Card('Limited', 'Morphing Jar', 'Effect Monster'),
-    new Card('Limited', 'Sangan', 'Effect Monster'),
-    new Card('Limited', 'Sinister Serpent', 'Effect Monster'),
-    new Card('Limited', 'Exiled Force', 'Effect Monster'),
-    new Card('Limited', 'Fiber Jar', 'Effect Monster'),
-    new Card('Limited', 'Injection Fairy Lily', 'Effect Monster'),
-    new Card('Limited', 'Twin-Headed Behemoth', 'Effect Monster'),
-    new Card('Limited', 'Breaker, the Magical Warrior', 'Effect Monster'),
-    new Card('Limited', 'Tribe-Infecting Virus', 'Effect Monster'),
-    new Card('Limited', 'Magical Scientist', 'Effect Monster'),
-    new Card('Limited', 'Reflect Bounder', 'Effect Monster'),
-    new Card('Limited', 'Vampire Lord', 'Effect Monster'),
-    new Card('Limited', 'Monster Reborn', 'Spell Card'),
-    new Card('Limited', 'Deliquent Duo', 'Spell Card'),
-    new Card('Limited', 'Confiscation', 'Spell Card'),
-    new Card('Limited', 'Painful Choice', 'Spell Card'),
-    new Card('Limited', 'The Forceful Sentry', 'Spell Card'),
-    new Card('Limited', 'Snatch Steal', 'Spell Card'),
-    new Card('Limited', 'Upstart Goblin', 'Spell Card'),
-    new Card('Limited', 'Swords of Revealing Light', 'Spell Card'),
-    new Card('Limited', 'Card Destruction', 'Spell Card'),
-    new Card('Limited', 'Premature Burial', 'Spell Card'),
-    new Card('Limited', 'United We Stand', 'Spell Card'),
-    new Card('Limited', 'Mage Power', 'Spell Card'),
-    new Card('Limited', 'Harpie\'s Feather Duster', 'Spell Card'),
-    new Card('Limited', 'Graceful Charity', 'Spell Card'),
-    new Card('Limited', 'Mirage of Nightmare', 'Spell Card'),
-    new Card('Limited', 'Heavy Storm', 'Spell Card'),
-    new Card('Limited', 'Butterfly Dagger Elma', 'Spell Card'),
-    new Card('Limited', 'Ceasefire', 'Trap Card'),
-    new Card('Limited', 'Call of the Haunted', 'Trap Card'),
-    new Card('Limited', 'Mirror Force', 'Trap Card'),
-    new Card('Limited', 'Magic Cylinder', 'Trap Card'),
-    new Card('Limited', 'Ring of Destruction', 'Trap Card'),
-    new Card('Limited', 'Reckless Greed', 'Trap Card'),
-    new Card('Semi-Limited', 'Morphing Jar #2', 'Effect Monster'),
-    new Card('Semi-Limited', 'Marauding Captain', 'Effect Monster'),
-    new Card('Semi-Limited', 'Nobleman of Crossout', 'Spell Card'),
-    new Card('Semi-Limited', 'Creature Swap', 'Spell Card'),
-    new Card('Semi-Limited', 'Reinforcement of the Army', 'Spell Card'),
-    new Card('Semi-Limited', 'Last Turn', 'Trap Card'),
-  ];
+@Injectable({ providedIn: 'root' })
+export class BanlistOfficial {
+
+  preCards = [
+    {"status": "Limited", "name": "Exodia the Forbidden One"},
+    {"status": "Limited", "name": "Left Leg of the Forbidden One"},
+    {"status": "Limited", "name": "Left Arm of the Forbidden One"},
+    {"status": "Limited", "name": "Right Leg of the Forbidden One"},
+    {"status": "Limited", "name": "Right Arm of the Forbidden One"},
+    {"status": "Limited", "name": "Cyber Jar"},
+    {"status": "Limited", "name": "Witch of the Black Forest"},
+    {"status": "Limited", "name": "Jinzo"},
+    {"status": "Limited", "name": "Morphing Jar"},
+    {"status": "Limited", "name": "Sangan"},
+    {"status": "Limited", "name": "Sinister Serpent"},
+    {"status": "Limited", "name": "Exiled Force"},
+    {"status": "Limited", "name": "Fiber Jar"},
+    {"status": "Limited", "name": "Injection Fairy Lily"},
+    {"status": "Limited", "name": "Twin-Headed Behemoth"},
+    {"status": "Limited", "name": "Breaker the Dark Magical Warrior"},
+    {"status": "Limited", "name": "Tribe-Infecting Virus"},
+    {"status": "Limited", "name": "Magical Scientist"},
+    {"status": "Limited", "name": "Reflect Bounder"},
+    {"status": "Limited", "name": "Vampire Lord"},
+    {"status": "Limited", "name": "Monster Reborn"},
+    {"status": "Limited", "name": "Delinquent Duo"},
+    {"status": "Limited", "name": "Confiscation"},
+    {"status": "Limited", "name": "Painful Choice"},
+    {"status": "Limited", "name": "The Forceful Sentry"},
+    {"status": "Limited", "name": "Snatch Steal"},
+    {"status": "Limited", "name": "Upstart Goblin"},
+    {"status": "Limited", "name": "Swords of Revealing Light"},
+    {"status": "Limited", "name": "Card Destruction"},
+    {"status": "Limited", "name": "Premature Burial"},
+    {"status": "Limited", "name": "United We Stand"},
+    {"status": "Limited", "name": "Mage Power"},
+    {"status": "Limited", "name": "Harpie\'s Feather Duster"},
+    {"status": "Limited", "name": "Graceful Charity"},
+    {"status": "Limited", "name": "Mirage of Nightmare"},
+    {"status": "Limited", "name": "Heavy Storm"},
+    {"status": "Limited", "name": "Butterfly Dagger - Elma"},
+    {"status": "Limited", "name": "Ceasefire"},
+    {"status": "Limited", "name": "Call of the Haunted"},
+    {"status": "Limited", "name": "Mirror Force"},
+    {"status": "Limited", "name": "Magic Cylinder"},
+    {"status": "Limited", "name": "Ring of Destruction"},
+    {"status": "Limited", "name": "Reckless Greed"},
+    {"status": "Semi-Limited", "name": "Morphing Jar 2"},
+    {"status": "Semi-Limited", "name": "Marauding Captain"},
+    {"status": "Semi-Limited", "name": "Nobleman of Crossout"},
+    {"status": "Semi-Limited", "name": "Creature Swap"},
+    {"status": "Semi-Limited", "name": "Reinforcement of the Army"},
+    {"status": "Semi-Limited", "name": "Last Turn"}
+  ]
+
+  cards: Array<Card> =[];
+
+  constructor(private cardAPI: CardAPI){}
+
+   fetchCards(){
+    for(let card of this.preCards){
+      this.cardAPI.getCard(card.name).subscribe(info => {
+        const newCard = new Card(card.status, info.name, info.type);
+        this.cards.push(newCard)
+        }
+      )
+    }
+  }
 }

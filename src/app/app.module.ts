@@ -18,7 +18,7 @@ import { BanlistCustomComponent } from './banlist/banlist-custom/banlist-custom.
 import { BanlistMergedComponent } from './banlist/banlist-merged/banlist-merged.component';
 import { BanlistOfficialComponent } from './banlist/banlist-official/banlist-official.component';
 import { BanlistListComponent } from './banlist/banlist-list/banlist-list.component';
-import { SortPipe } from './shared/sort.pipe';
+import { SortNamePipe } from './shared/sort-name.pipe';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,7 @@ import { SortPipe } from './shared/sort.pipe';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    SortPipe
+    SortNamePipe
   ],
   providers: [],
   bootstrap: [AppComponent]
