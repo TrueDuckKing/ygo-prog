@@ -1,11 +1,32 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { CardAPI } from "src/app/shared/card-api.service";
-import { Card } from "src/app/shared/card.model"
+import { Subject } from "rxjs";
+import { CardAPIService } from "src/app/shared/card-api.service";
+import { Card } from "src/app/shared/card.model";
 
-@Injectable({ providedIn: 'root' })
-export class BanlistOfficial {
+@Injectable({
+  providedIn: 'root'
+})
+export class BanlistService {
+  mergedChanged = new Subject<Card[]>();
+  customChanged = new Subject<Card[]>();
+  officialChanged = new Subject<Card[]>();
 
-  preCards = [
+  startedEditing = new Subject<number>();
+
+  constructor(private cardApiService: CardAPIService, private http: HttpClient){}
+
+  preCardsCustom = [
+    {"status": "Banned", "name": "Yata-Garasu"},
+    {"status": "Banned", "name": "Change of Heart"},
+    {"status": "Banned", "name": "Dark Hole"},
+    {"status": "Banned", "name": "Giant Trunade"},
+    {"status": "Banned", "name": "Raigeki"},
+    {"status": "Banned", "name": "Imperial Order"},
+    {"status": "Limited", "name": "Pot of Greed"},
+  ]
+
+  preCardsOfficial = [
     {"status": "Limited", "name": "Exodia the Forbidden One"},
     {"status": "Limited", "name": "Left Leg of the Forbidden One"},
     {"status": "Limited", "name": "Left Arm of the Forbidden One"},
@@ -57,15 +78,61 @@ export class BanlistOfficial {
     {"status": "Semi-Limited", "name": "Last Turn"}
   ]
 
-  cards: Array<Card> =[];
+  cardsCustom: Card[] = []
 
-  constructor(private cardAPI: CardAPI){}
+  cardsOfficial: Card[] = []
 
-   fetchCards(){
-    for(let card of this.preCards){
-      this.cardAPI.getCard(card.name).subscribe(info => {
+  getCustomCards(){
+    return this.cardsCustom.slice()
+  }
+
+  getOfficialCards(){
+    return this.cardsOfficial.slice()
+  }
+
+  getAllCards(){
+    return this.cardsOfficial.slice().concat(...this.cardsCustom.slice())
+  }
+
+  emitChange(){
+    this.customChanged.next(this.cardsCustom.slice());
+    this.mergedChanged.next(this.getAllCards());
+    this.officialChanged.next(this.cardsOfficial.slice());
+  }
+
+  getCard(index: number){
+    return this.cardsCustom[index];
+  }
+
+  addCard(card: Card){
+    this.cardsCustom.push(card);
+    this.emitChange();
+  }
+
+  updateCard(index: number, newCard: Card) {
+    this.cardsCustom[index] = newCard;
+    this.emitChange();
+  }
+
+  removeCard(index: number){
+    this.cardsCustom.splice(index, 1);
+    this.emitChange();
+  }
+
+  fetchCards(){
+    for(let card of this.preCardsCustom){
+      this.cardApiService.getCard(card.name).subscribe(info => {
         const newCard = new Card(card.status, info.name, info.type);
-        this.cards.push(newCard)
+        this.cardsCustom.push(newCard);
+        this.emitChange();
+        }
+      )
+    }
+    for(let card of this.preCardsOfficial){
+      this.cardApiService.getCard(card.name).subscribe(info => {
+        const newCard = new Card(card.status, info.name, info.type);
+        this.cardsOfficial.push(newCard)
+        this.emitChange();
         }
       )
     }

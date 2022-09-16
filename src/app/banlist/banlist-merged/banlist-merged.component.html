@@ -1,11 +1,11 @@
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-auto">
     <app-banlist-edit></app-banlist-edit>
   </div>
 </div>
 <br>
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-5">
     <div class="table-responsive">
       <table class="table table-bordered">
         <thead>
@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let card of cards | sortName; let i = index" [ngClass]="card.type" (click)="onEditCard(i)">
+          <tr *ngFor="let card of cards; let i = index" [ngClass]="card.type" (click)="onEditCard(i)">
             <td scope="row">{{card.type}}</td>
             <td>{{card.name}}</td>
             <td>{{card.status}}</td>

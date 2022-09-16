@@ -5,7 +5,7 @@ import { map } from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class CardAPI {
+export class CardAPIService {
   private cardsURL = 'https://db.ygoprodeck.com/api/v7/cardinfo.php?'
 
   constructor(private http: HttpClient) {}

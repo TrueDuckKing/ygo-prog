@@ -4,7 +4,7 @@ import { User } from "../user.model";
 @Injectable({
   providedIn:'root'
 })
-export class UserService {
+export class UsersListService {
   public users: User[] = [
     new User('Kub', 'King of Ducks', 26),
     new User('Rof', 'First half of Glackip',37),

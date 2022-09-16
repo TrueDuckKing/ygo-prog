@@ -1,25 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Card } from 'src/app/shared/card.model';
-import { BanlistCustom } from '../banlist-custom/banlist-custom.service';
-import { BanlistOfficial } from '../banlist-official/banlist-official.service';
+import { BanlistService } from '../banlist.service';
 
 @Component({
   selector: 'app-banlist-merged',
   templateUrl: './banlist-merged.component.html',
   styleUrls: ['./banlist-merged.component.css']
 })
-export class BanlistMergedComponent implements OnInit {
-  cards: Array<Card> = []
+export class BanlistMergedComponent implements OnInit, OnDestroy {
+  cards: Array<Card> = [];
+  private subscription!: Subscription
 
-  constructor(private banlistCustom: BanlistCustom, private banlistOfficial: BanlistOfficial) { }
+  constructor(private banlistService: BanlistService) { }
 
   ngOnInit(): void {
-    let tempCards = this.banlistOfficial.cards.concat(...this.banlistCustom.cards)
-    this.cards = tempCards
+    this.cards = this.banlistService.getAllCards();
+    this.subscription = this.banlistService.mergedChanged.subscribe(
+      (cards: Card[]) => {
+        this.cards = cards
+      }
+    )
   }
 
   onEditCard(index: number){
-    this.banlistCustom.startedEditing.next(index);
+    this.banlistService.startedEditing.next(index);
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }

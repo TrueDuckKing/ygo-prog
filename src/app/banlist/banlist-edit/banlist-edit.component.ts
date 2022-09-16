@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { CardAPI } from 'src/app/shared/card-api.service';
+import { CardAPIService } from 'src/app/shared/card-api.service';
 import { Card } from 'src/app/shared/card.model';
-import { BanlistCustom } from '../banlist-custom/banlist-custom.service';
+import { BanlistService } from '../banlist.service';
 
 @Component({
   selector: 'app-banlist-edit',
@@ -17,14 +17,14 @@ export class BanlistEditComponent implements OnInit, OnDestroy {
   editedCardIndex!: number;
   editedCard!: Card;
 
-  constructor(private cardApi: CardAPI, private banlistCustom: BanlistCustom) { }
+  constructor(private cardAPIService: CardAPIService, private banlistService: BanlistService) { }
 
   ngOnInit(){
-    this.subscription = this.banlistCustom.startedEditing.subscribe(
+    this.subscription = this.banlistService.startedEditing.subscribe(
       (index: number) => {
         this.editedCardIndex = index;
         this.editMode = true;
-        this.editedCard = this.banlistCustom.getCard(index);
+        this.editedCard = this.banlistService.getCard(index);
         this.cardForm.setValue({
           name: this.editedCard.name,
           status: this.editedCard.status
@@ -35,14 +35,14 @@ export class BanlistEditComponent implements OnInit, OnDestroy {
 
   onAddCard(form: NgForm) {
     const value = form.value;
-    this.cardApi.getCard(value.name)
+    this.cardAPIService.getCard(value.name)
       .subscribe(
         cardInfo => {
           const newCard = new Card(value.status, cardInfo.name, cardInfo.type);
           if(this.editMode) {
-            this.banlistCustom.updateCard(this.editedCardIndex, newCard)
+            this.banlistService.updateCard(this.editedCardIndex, newCard)
           } else {
-            this.banlistCustom.addCard(newCard);
+            this.banlistService.addCard(newCard);
           }
       }
     )
@@ -56,7 +56,7 @@ export class BanlistEditComponent implements OnInit, OnDestroy {
   }
 
   onDelete() {
-    this.banlistCustom.removeCard(this.editedCardIndex);
+    this.banlistService.removeCard(this.editedCardIndex);
     this.onClear();
   }
 

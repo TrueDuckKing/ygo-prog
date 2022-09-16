@@ -1,16 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { BanlistCustom } from './banlist-custom/banlist-custom.service';
-import { BanlistOfficial } from './banlist-official/banlist-official.service';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { BanlistService } from './banlist.service';
 @Component({
   selector: 'app-banlist',
   templateUrl: './banlist.component.html',
   styleUrls: ['./banlist.component.css']
 })
-export class BanlistComponent implements OnInit {
-  constructor(private banlistCutom: BanlistCustom, private banlistOfficial: BanlistOfficial){}
+export class BanlistComponent implements OnInit{
+  constructor(private banlistService: BanlistService){}
 
   ngOnInit(): void {
-    this.banlistCutom.fetchCards();
-    this.banlistOfficial.fetchCards();
+    this.banlistService.fetchCards()
   }
 }

@@ -1,23 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Card } from 'src/app/shared/card.model';
-import { BanlistCustom } from './banlist-custom.service';
+import { BanlistService } from '../banlist.service';
 
 @Component({
   selector: 'app-banlist-custom',
   templateUrl: './banlist-custom.component.html',
   styleUrls: ['./banlist-custom.component.css']
 })
-export class BanlistCustomComponent implements OnInit {
+export class BanlistCustomComponent implements OnInit, OnDestroy {
   cards: Array<Card> = [];
+  private subscription!: Subscription
 
-  constructor(private banlistCustom: BanlistCustom) { }
+  constructor(private banlistService: BanlistService) { }
 
   ngOnInit(): void {
-    this.cards = this.banlistCustom.cards;
+    this.cards = this.banlistService.getCustomCards();
+    this.subscription = this.banlistService.customChanged.subscribe(
+      (cards: Card[]) => {
+        this.cards = cards
+      }
+    )
   }
 
   onEditCard(index: number){
-    this.banlistCustom.startedEditing.next(index);
+    this.banlistService.startedEditing.next(index);
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }
