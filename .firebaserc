@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "ygo-prog"
+  },
+  "targets": {
+    "ygo-prog": {
+      "hosting": {
+        "ygo-prog": [
+          "ygo-prog"
+        ]
+      }
+    }
+  }
+}

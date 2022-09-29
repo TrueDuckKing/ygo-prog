@@ -11,7 +11,7 @@ export class CacheResolverService {
   constructor() {}
 
   set(key: string, value: HttpResponse<any>){
-    console.log('Set cache key', key)
+    // console.log('Set cache key', key)
     this.cache.set(key, value)
   }
 

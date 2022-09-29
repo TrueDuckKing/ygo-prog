@@ -10,7 +10,7 @@ import { UsersStartComponent } from './users/users-start/users-start.component';
 import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/banlist', pathMatch: 'full'},
+  { path: '', redirectTo: '/banlist/custom', pathMatch: 'full'},
   { path: 'banlist', component: BanlistComponent, children: [
     { path: '', redirectTo: 'custom', pathMatch: 'full'},
     { path: 'custom', component: BanlistCustomComponent},

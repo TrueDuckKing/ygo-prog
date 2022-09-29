@@ -15,6 +15,7 @@ export class BanlistOfficialComponent implements OnInit, OnDestroy {
   constructor(private banlistService: BanlistService) { }
 
   ngOnInit(): void {
+    this.cards = this.banlistService.getOfficialCards()
     this.subscription = this.banlistService.officialChanged.subscribe(
       (cards: Card[]) => {
         this.cards = cards

@@ -11,7 +11,7 @@ export class CardAPIService {
   constructor(private http: HttpClient) {}
 
   getCard(name: string){
-    return this.http.get(this.cardsURL + 'name=' +name)
+    return this.http.get(this.cardsURL + 'name=' + name)
     .pipe(
       map(response => {
         let infoArray = Object.values(response);
@@ -19,6 +19,21 @@ export class CardAPIService {
         let i = info[0]
         return i
       }))
+  }
+
+  getCards(cards: { status: string; name: string; }[]){
+    return cards.forEach(card => {
+      this.http.get(this.cardsURL + 'name=' + card.name)
+        .pipe(
+          map(response => {
+            let infoArray = Object.values(response);
+            let info = infoArray[0]
+            let i = info[0]
+            return i
+          }
+        )
+      )
+    })
   }
 
 }

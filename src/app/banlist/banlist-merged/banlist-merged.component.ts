@@ -23,10 +23,6 @@ export class BanlistMergedComponent implements OnInit, OnDestroy {
     )
   }
 
-  onEditCard(index: number){
-    this.banlistService.startedEditing.next(index);
-  }
-
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

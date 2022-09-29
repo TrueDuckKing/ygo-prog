@@ -97,6 +97,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "ygo-prog:build:production",
+            "firebaseProject": "ygo-prog",
+            "firebaseHostingSite": "ygo-prog"
+          }
         }
       }
     }

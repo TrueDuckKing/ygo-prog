@@ -18,6 +18,9 @@ import { BanlistMergedComponent } from './banlist/banlist-merged/banlist-merged.
 import { BanlistOfficialComponent } from './banlist/banlist-official/banlist-official.component';
 import { BanlistListComponent } from './banlist/banlist-list/banlist-list.component';
 import { CacheInterceptor } from './shared/cache-interceptor.service';
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
 
 @NgModule({
   declarations: [
@@ -39,14 +42,16 @@ import { CacheInterceptor } from './shared/cache-interceptor.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CacheInterceptor,
       multi: true
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })

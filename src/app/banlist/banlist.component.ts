@@ -9,6 +9,8 @@ export class BanlistComponent implements OnInit{
   constructor(private banlistService: BanlistService){}
 
   ngOnInit(): void {
-    this.banlistService.fetchCards()
+    if(this.banlistService.getAllCards().length === 0){
+      this.banlistService.fetchCards()
+    }
   }
 }
